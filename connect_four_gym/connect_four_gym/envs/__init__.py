@@ -1,0 +1,1 @@
+from connect_four_gym.envs.connectfour import ConnectFourEnv

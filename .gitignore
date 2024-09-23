@@ -1,0 +1,4 @@
+.idea/
+connectfour-log
+*.zip
+ppo_cartpole_tensorboard/
