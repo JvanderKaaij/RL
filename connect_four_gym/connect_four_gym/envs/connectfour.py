@@ -44,9 +44,9 @@ class ConnectFourEnv(gym.Env):
         return observation, info
 
     def step(self, action):
-        move_column = action
+        move_column = 2
         # punish player for an action where the top row in column is already full
-        if not self.board[move_column][self.rows - 1] == -1:
+        if not self.board[move_column][0] == -1:
             reward = -1  # TODO skip rest OR MOVE TO CHECK FOR EPISODE TERMINATION
 
         row = self.rows - 1
