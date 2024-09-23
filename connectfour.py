@@ -1,27 +1,30 @@
 import gymnasium as gym
-from stable_baselines3 import DQN, PPO
+from torchrl.collectors import SyncDataCollector, MultiaSyncDataCollector
+from torchrl.data import TensorDictReplayBuffer, LazyMemmapStorage, MultiStep, LazyTensorStorage
+from torchrl.envs import GymEnv
+from torchrl.modules import MLP, ConvNet
+
 import connect_four_gym
+import torch
 from stable_baselines3.common.buffers import ReplayBuffer
 
+from torchrl.envs import (
+    EnvCreator,
+    ExplorationType,
+    ParallelEnv,
+    RewardScaling,
+    StepCounter,
+)
+
+
 def train():
-    env = gym.make('ConnectFour-v0')
+    env = GymEnv('ConnectFour-v0')
+    reset = env.reset()
+    buffer = TensorDictReplayBuffer(storage=LazyTensorStorage(10), batch_size=5)
+    model = ConvNet(in_features=3, depth=1, num_cells=[32,])
+
+    print(reset)
     log_dir = "./connectfour-log/"
-
-    # TODO: Alternate an x amount of times:
-    agent_one_model = DQN('MlpPolicy', env, verbose=1, tensorboard_log=log_dir)
-    agent_one_model.learn(10000)
-    # obs, info = env.reset()
-    # while True:
-    #     action, _states = agent_one_model.predict(obs)
-    #     obs, reward, terminated, truncated, info = env.step(action)
-    #
-    #     if terminated or truncated:
-    #         obs, info = env.reset()
-
-
-    # agent_two_model = DQN('MlpPolicy', env, verbose=1, tensorboard_log=log_dir)
-    # agent_two_model.learn(10000)
-
 
 
 train()
