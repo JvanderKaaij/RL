@@ -50,10 +50,8 @@ class ConnectFourEnv(gym.Env):
             reward = -1  # TODO skip rest OR MOVE TO CHECK FOR EPISODE TERMINATION
 
         row = self.rows - 1
-        while row >= 0 and self.board[move_column][row] == -1:
+        while 0 < row < self.rows and self.board[move_column][row] != -1:
             row -= 1
-
-        row += 1
 
         self.board[move_column][row] = self.current_player
 
@@ -72,7 +70,7 @@ class ConnectFourEnv(gym.Env):
     def check_for_episode_termination(self, movecol, row):
         winner, reward_vector = self.winner, [0, 0]
         if self._does_move_win(movecol, row):
-            winner = 1 - self.current_player
+            winner = self.current_player
             if winner == 0:
                 reward_vector = [1, -1]
             elif winner == 1:
@@ -104,13 +102,12 @@ class ConnectFourEnv(gym.Env):
         :param y: row index
         :returns: (boolean) True if the previous move has won the game
         """
-        me = self.board[x][y]
         for (dx, dy) in [(0, +1), (+1, +1), (+1, 0), (+1, -1)]:
             p = 1
-            while self._is_on_board(x + p * dx, y + p * dy) and self.board[x + p * dx][y + p * dy] == me:
+            while self._is_on_board(x + p * dx, y + p * dy) and self.board[x + p * dx][y + p * dy] == self.current_player:
                 p += 1
             n = 1
-            while self._is_on_board(x - n * dx, y - n * dy) and self.board[x - n * dx][y - n * dy] == me:
+            while self._is_on_board(x - n * dx, y - n * dy) and self.board[x - n * dx][y - n * dy] == self.current_player:
                 n += 1
 
             if p + n >= (self.connections + 1):  # want (p-1) + (n-1) + 1 >= 4, or more simply p + n >- 5

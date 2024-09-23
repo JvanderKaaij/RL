@@ -7,7 +7,7 @@ def train():
     env = gym.make('ConnectFour-v0')
     log_dir = "./connectfour-log/"
     model = DQN('MlpPolicy', env, verbose=1, tensorboard_log=log_dir)
-    model.learn(1000)
+    model.learn(100000)
     model.save("dqn_connectfour")
 
 
