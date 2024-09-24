@@ -13,10 +13,10 @@ from torchrl.record import CSVLogger, VideoRecorder
 
 path = './training_loop'
 logger = CSVLogger(exp_name='dqn', log_dir=path, video_format='mp4')
-video_recorder = VideoRecorder(logger, tag='video')
+video_recorder = VideoRecorder(logger, tag='video', video_codec='mpeg4')
 
 init_rand_steps = 5000
-frames_per_batch = 100
+frames_per_batch = 10000
 optim_steps = 10
 
 torch.manual_seed(0)
