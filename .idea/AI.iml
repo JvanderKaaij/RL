@@ -7,7 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/.win_venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (AI)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (.win-venv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Math" />
   </component>
