@@ -15,8 +15,12 @@ path = './training_loop'
 logger = CSVLogger(exp_name='dqn', log_dir=path, video_format='mp4')
 video_recorder = VideoRecorder(logger, tag='video', video_codec='mpeg4')
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# torch.set_default_device(device)
+# print(torch.get_default_device())
+
 init_rand_steps = 5000
-frames_per_batch = 10000
+frames_per_batch = 100
 optim_steps = 10
 
 torch.manual_seed(0)
@@ -61,10 +65,10 @@ for i, data in enumerate(collector):
             # Update target params
             updater.step()
             if i % 10:
-                torchrl_logger.info(f"Max num steps: {max_length}, rb length {len(rb)}")
+                torchrl_logger.info(f"Max num steps: {max_length}, rb length {len(rb)} at episode {total_episodes}")
             total_count += data.numel()
             total_episodes += data["next", "done"].sum()
-    if max_length > 200:
+    if max_length > 400:
         break
 
 t1 = time.time()

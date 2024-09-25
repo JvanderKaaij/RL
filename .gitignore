@@ -7,3 +7,4 @@ ppo_cartpole_tensorboard/
 connect_four_gym/connect_four_gym.egg-info
 connect_four_gym/connect_four_gym/envs/__pycache__/
 connect_four_gym/connect_four_gym/__pycache__/
+training_loop/*
