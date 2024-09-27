@@ -16,8 +16,8 @@ logger = CSVLogger(exp_name='dqn', log_dir=path, video_format='mp4')
 video_recorder = VideoRecorder(logger, tag='video', video_codec='mpeg4')
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# torch.set_default_device(device)
-# print(torch.get_default_device())
+# TorchTutorials.set_default_device(device)
+# print(TorchTutorials.get_default_device())
 
 init_rand_steps = 5000
 frames_per_batch = 100
